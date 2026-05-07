@@ -1,0 +1,244 @@
+<div class="p-6">
+
+
+    <div class="flex justify-between items-center mb-6">
+
+        <h1 class="text-2xl font-bold text-gray-800">Membros</h1>
+
+        <button (click)="abrirModal()"
+            class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg shadow transition">+ Cadastrar
+            membro</button>
+
+    </div>
+
+
+    <div class="mb-4">
+        <input type="search" placeholder="Buscar pelo nome..."
+            class="w-full md:w-80 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+    </div>
+
+
+    <div class="bg-white rounded-xl shadow overflow-hidden">
+
+        <table class="w-full text-sm text-left">
+
+
+            <thead class="bg-gray-100 text-gray-600 uppercase text-xs">
+                <tr>
+                    <th class="px-4 py-3">ID</th>
+                    <th class="px-4 py-3">Nome</th>
+                    <th class="px-4 py-3">WhatsApp</th>
+                    <th class="px-4 py-3 text-center">Mensagem</th>
+                    <th class="px-4 py-3 text-center">Informações</th>
+                    <th class="px-4 py-3 text-center">Ações</th>
+                </tr>
+            </thead>
+
+
+            <tbody class="text-gray-700">
+
+                <tr class="border-t hover:bg-gray-50 transition">
+                    <td class="px-4 py-3">01</td>
+                    <td class="px-4 py-3 font-medium">Luan</td>
+                    <td class="px-4 py-3">47 93383-5162</td>
+
+
+                    <td class="px-4 py-3 text-center">
+                        <a href="https://wa.me/5547933839368" target="_blank"
+                        class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md text-xs inline-flex items-center gap-1">💬 Enviar</a>
+                    </td>
+
+                    <!-- <a 
+  href="https://wa.me/5547933835162"
+  target="_blank"
+  class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md text-xs inline-block">
+  Enviar Mensagem
+</a> -->
+
+                    <td class="px-4 py-3 text-center">
+                        <button (click)="abrirInfoModal()"
+                            class="bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-1 rounded-md text-xs">
+                            +Informações
+                        </button>
+                    </td>
+                    <td class="px-4 py-3 text-center flex justify-center gap-2">
+                        <button class="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded-md text-xs">
+                            Editar
+                        </button>
+
+                        <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs">
+                            Apagar
+                        </button>
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<div *ngIf="showModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+
+
+    <div class="bg-white rounded-xl shadow-lg w-full max-w-2xl p-6 max-h-[90vh] overflow-y-auto">
+
+
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-semibold text-gray-800">Cadastrar Membro</h2>
+
+            <button (click)="fecharModal()" class="text-gray-500 hover:text-gray-700 text-lg">
+                ✖
+            </button>
+        </div>
+
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+
+            <div class="md:col-span-2">
+                <label class="text-sm text-gray-600">Nome</label>
+                <input type="text" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-purple-500">
+            </div>
+
+
+            <div>
+                <label class="text-sm text-gray-600">WhatsApp</label>
+                <input type="text" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-purple-500">
+            </div>
+
+
+            <div>
+                <label class="text-sm text-gray-600">CEP</label>
+                <input type="text" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-purple-500">
+            </div>
+
+
+            <div class="md:col-span-2">
+                <label class="text-sm text-gray-600">Rua</label>
+                <input type="text" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-purple-500">
+            </div>
+
+
+            <div>
+                <label class="text-sm text-gray-600">Número</label>
+                <input type="text" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-purple-500">
+            </div>
+
+
+            <div>
+                <label class="text-sm text-gray-600">Bairro</label>
+                <input type="text" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-purple-500">
+            </div>
+
+
+            <div>
+                <label class="text-sm text-gray-600">Cidade</label>
+                <input type="text" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-purple-500">
+            </div>
+
+
+            <div>
+                <label class="text-sm text-gray-600">Estado</label>
+                <input type="text" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-purple-500">
+            </div>
+
+
+            <div class="md:col-span-2">
+                <label class="text-sm text-gray-600">Complemento</label>
+                <input type="text" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-purple-500">
+            </div>
+
+        </div>
+
+
+        <div class="flex justify-end gap-2 mt-6">
+            <button (click)="fecharModal()" class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition">
+                Cancelar
+            </button>
+
+            <button class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition shadow">
+                Salvar
+            </button>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<div *ngIf="showInfoModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+
+
+    <div class="bg-white rounded-xl shadow-lg w-full max-w-lg p-6">
+
+        
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-semibold text-gray-800">
+                Informações do Membro
+            </h2>
+
+            <button (click)="fecharInfoModal()" class="text-gray-500 hover:text-gray-700 text-lg">
+                ✖
+            </button>
+        </div>
+
+        
+        <div class="grid grid-cols-2 gap-4 text-sm">
+
+            <div>
+                <p class="text-gray-500">Nome</p>
+                <p class="font-medium">Luan</p>
+            </div>
+
+            <div>
+                <p class="text-gray-500">WhatsApp</p>
+                <p class="font-medium">(47) 93383-5162</p>
+            </div>
+
+            <div class="col-span-2">
+                <p class="text-gray-500">Rua</p>
+                <p class="font-medium">Rua Sete lagoas</p>
+            </div>
+
+            <div>
+                <p class="text-gray-500">Número</p>
+                <p class="font-medium">55</p>
+            </div>
+
+            <div>
+                <p class="text-gray-500">Bairro</p>
+                <p class="font-medium">Benedito</p>
+            </div>
+
+            <div>
+                <p class="text-gray-500">Cidade</p>
+                <p class="font-medium">Indaial</p>
+            </div>
+
+            <div>
+                <p class="text-gray-500">Estado</p>
+                <p class="font-medium">SC</p>
+            </div>
+
+            <div class="col-span-2">
+                <p class="text-gray-500">Complemento</p>
+                <p class="font-medium">apto 02</p>
+            </div>
+
+        </div>
+
+    
+        <div class="flex justify-end mt-6">
+            <button (click)="fecharInfoModal()"
+                class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg">
+                Fechar
+            </button>
+        </div>
+
+    </div>
+
+</div>

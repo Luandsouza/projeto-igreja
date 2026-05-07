@@ -1,0 +1,216 @@
+
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-colaborador',
+  imports: [FormsModule, CommonModule],
+  templateUrl: './colaborador.html',
+  styleUrl: './colaborador.css',
+})
+export class Colaborador {
+nomes: string [] = [];
+nascimentos: Date [] = [];
+valores: number [] = [];
+trabalhos: number [] = [];
+refeicoes: number [] = [];
+transportes: number [] = [];
+planos: number [] = [];
+brutos: number [] = [];
+valoresIr: number [] = [];
+valoresInss: number [] = [];
+liquidos: number [] = [];
+idades: number [] = [];
+
+
+nome: string = "";
+nascimento: Date | null = null;
+valor: number | null = null;
+trabalho: number | null = null;
+refeicao: number | null = null;
+transporte: number | null = null;
+saude: number | null = null;
+salarioBruto: number | null = null;
+valorIr: number | null = null;
+porcentagem: number | null = null;
+valorInss: number | null = null;
+porcentagemInss: number | null = null;
+salarioLiquido: number | null = null;
+idade: number | null = null;
+
+indiceParaEditar: number = -1;
+
+
+
+  
+
+
+calculos(): void{
+  if(this.valor === null || this.trabalho === null || this.refeicao === null || this.transporte === null || this.nascimento === null) {
+    alert("Por favor preencha as informações acima")
+    return;
+  }
+
+const valor = Number(this.valor);
+const trabalho = Number(this.trabalho);
+const refeicao = Number(this.refeicao);
+const transporte = Number(this.transporte);
+
+this.salarioBruto = valor * trabalho;
+
+if(this.salarioBruto < 5000) {
+    this.porcentagem = 0;
+  } else if(this.salarioBruto < 7350) {
+    this.porcentagem = 0.075;
+  } else {
+    this.porcentagem= 0.15;
+  }
+
+this.valorIr = this.salarioBruto * this.porcentagem;
+
+if(this.salarioBruto < 1621) {
+  this.porcentagemInss = 0.075;
+} else if(this.salarioBruto < 2902.84) {
+  this.porcentagemInss = 0.09;
+} else if(this.salarioBruto < 4354.27) {
+  this.porcentagemInss = 0.12;
+} else {
+  this.porcentagemInss = 0.14;
+}
+
+this.valorInss = this.salarioBruto * this.porcentagemInss;
+
+
+
+this.salarioLiquido = this.salarioBruto + refeicao+ transporte - this.valorIr - this.valorInss;
+
+
+const data = new Date(this.nascimento + 'T00:00:00');
+const anoAtual = new Date().getFullYear();
+this.idade = anoAtual - data.getFullYear();
+
+
+}
+
+salvar(): void{
+  if(this.indiceParaEditar === -1) {
+    this.cadastar();
+  } else {
+    this.editar();
+  }
+
+  this.nome = "";
+  this.nascimento = null; 
+  this.valor = null; 
+  this.trabalho = null; 
+  this.refeicao = null; 
+  this.transporte = null; 
+  this.saude = null; 
+
+
+
+}
+
+cadastar(): void{
+   if(this.valor === null || this.trabalho === null || this.refeicao === null || 
+    this.transporte === null || this.nascimento === null || this.saude === null) {
+    alert("Por favor preencha as informações acima")
+    return;
+  }
+
+  this.calculos();
+
+  if(this.salarioBruto === null || this.valorIr === null || this.valorInss === null 
+    || this.salarioLiquido === null || this.idade === null) {
+    alert("Erro ao calcular")
+    return;
+  }
+
+  this.nomes.push(this.nome);
+  this.nascimentos.push(this.nascimento);
+  this.valores.push(this.valor);
+  this.trabalhos.push(this.trabalho);
+  this.refeicoes.push(this.refeicao);
+  this.transportes.push(this.transporte);
+  this.planos.push(this.saude);
+  this.brutos.push(this.salarioBruto);
+  this.valoresIr.push(this.valorIr);
+  this.valoresInss.push(this.valorInss);
+  this.liquidos.push(this.salarioLiquido);
+  this.idades.push(this.idade);
+
+alert("Colaborador cadastrado com sucesso")
+
+
+
+}
+
+editar(): void{
+
+  if(this.valor === null || this.trabalho === null || this.refeicao === null || 
+    this.transporte === null || this.nascimento === null || this.saude === null) {
+    alert("Por favor preencha as informações acima")
+    return;
+  }
+
+  this.calculos();
+
+    if (
+    this.salarioBruto === null ||
+    this.valorIr === null ||
+    this.valorInss === null ||
+    this.salarioLiquido === null ||
+    this.idade === null
+  ) {
+    alert("Erro ao recalcular");
+    return;
+  }
+
+  this.nomes[this.indiceParaEditar] = this.nome;
+  this.nascimentos[this.indiceParaEditar] = this.nascimento;
+  this.valores[this.indiceParaEditar] = this.valor;
+  this.trabalhos[this.indiceParaEditar] = this.trabalho;
+  this.refeicoes[this.indiceParaEditar] = this.refeicao;
+  this.transportes[this.indiceParaEditar] = this.transporte;
+  this.planos[this.indiceParaEditar] = this.saude;
+  this.brutos[this.indiceParaEditar] = this.salarioBruto;
+  this.valoresIr[this.indiceParaEditar] = this.valorIr;
+  this.valoresInss[this.indiceParaEditar] = this.valorInss;
+  this.liquidos[this.indiceParaEditar] = this.salarioLiquido;
+  this.idades[this.indiceParaEditar] = this.idade;
+
+  alert("Alterado com sucesso");
+
+  this.indiceParaEditar = -1;
+}
+
+apagar(nomeColaborador: string): void {
+  let indiceNomeColaborador = this.nomes.lastIndexOf(nomeColaborador);
+
+  this.nomes.splice(indiceNomeColaborador, 1);
+  this.nascimentos.splice(indiceNomeColaborador, 1);
+  this.valores.splice(indiceNomeColaborador,1);;
+  this.trabalhos.splice(indiceNomeColaborador,1);
+  this.refeicoes.splice(indiceNomeColaborador,1);
+  this.transportes.splice(indiceNomeColaborador,1);
+  this.planos.splice(indiceNomeColaborador,1);
+}
+
+preencherCampoParaEditar(nomeColaborador: string, nascimentoColaborador: Date, valorColaborador: number, trabalhoColaborador: number, refeicaoColaborador: number, transporteColaborador: number, planoColaborador: number): void{
+  this.indiceParaEditar = this.nomes.indexOf(nomeColaborador);
+
+  this.nome = nomeColaborador;
+  this.nascimento = nascimentoColaborador;
+  this.valor = valorColaborador;
+  this.trabalho = trabalhoColaborador;
+  this.refeicao = refeicaoColaborador;
+  this.transporte = transporteColaborador;
+  this.saude = planoColaborador;
+
+  
+}
+}
+
+
+  

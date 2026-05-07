@@ -1,0 +1,76 @@
+<div>
+    <div>
+        <label for="nome">Nome</label>
+        <input type="text" name="nome" [(ngModel)]="nome">
+    </div>
+
+    <div>
+        <label for="nascimento">Data de Nascimento</label>
+        <input type="date" name="nascimento" [(ngModel)]="nascimento">
+    </div>
+
+    <div>
+        <label for="hora">Valor Hora</label>
+        <input type="number" name="valor" [(ngModel)]="valor">
+    </div>
+
+    <div>
+        <label for="trabalhado">Horas trabalhada</label>
+        <input type="number" name="trabalhado" [(ngModel)]="trabalho">
+    </div>
+
+    <div>
+        <label for="refeicao">Refeição</label>
+        <input type="number" name="refeicao" [(ngModel)]="refeicao">
+    </div>
+
+    <div>
+        <label for="transporte">Transporte</label>
+        <input type="text" name="transporte" [(ngModel)]="transporte">
+    </div>
+
+    <div>
+        <label for="saude">Plano de Saúde</label>
+        <select name="saude" id="saude" [(ngModel)]="saude">
+            <option value="300">R$ 300,00</option>
+            <option value="500">R$ 500,00</option>
+            <option value="700">R$ 700,00</option>
+        </select>
+    </div>
+    <div>
+        <button (click)="salvar()">Salvar</button>
+    </div>
+
+
+
+</div>
+
+<ul>
+    @if (nomes.length === 0) {
+    <span>Nenhum Cliente cadastrado</span>
+    } @else {
+
+    @for (nome of nomes; let i = $index; track nome) {
+    <li>
+        <span>
+            {{ nomes[i] }} -
+            {{ nascimentos[i] | date:'dd/MM/yyyy' }} - 
+            {{idades[i]}} - 
+            {{ valores[i] }} -
+            {{ trabalhos[i] }} -
+            {{ refeicoes[i] }} -
+            {{ transportes[i] }} -
+            {{ planos[i] }} - 
+            {{brutos[i].toFixed(2) }} - 
+            {{valoresIr[i].toFixed(2)}} - 
+            {{valoresInss[i].toFixed(2)}} - 
+            {{liquidos[i].toFixed(2)}}
+        </span>
+        <button (click)="preencherCampoParaEditar(nome, nascimentos [i], valores[i], trabalhos[i], refeicoes[i], transportes[i], planos[i])"><i class="fa-solid fa-pencil"></i></button>
+        <button (click)="apagar(nome)"><i class="fa-solid fa-trash"></i></button>
+    </li>
+
+    }
+    }
+
+</ul>
